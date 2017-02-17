@@ -105,6 +105,8 @@ set ambiwidth=double
 
 " 括弧のハイライトを消す(括弧が複雑だと重くなる)
 let loaded_matchparen = 1
+" Python3 support
+let g:python3_host_prog = $PYENV_ROOT . '/shims/python3'
 
 "}}}
 
@@ -186,6 +188,9 @@ inoremap ¥ \
 nnoremap + <C-a>
 nnoremap - <C-x>
 
+" terminalモード終了
+tnoremap <silent> <ESC> <C-\><C-n>
+
 "}}}
 
 "---------------------------------------------------------------------
@@ -264,3 +269,52 @@ augroup BinaryXXD
         autocmd BufWritePost * if &binary | silent %!xxd -g 1
         autocmd BufWritePost * set nomod | endif
 augroup END
+
+"---------------------------------------------------------------------
+" {{{ dein.vim
+"---------------------------------------------------------------------
+" see: http://qiita.com/ryo2851/items/4e3c287d5a0005780034
+" プラグインがインストールされるディレクトリ
+let s:dein_dir = expand('~/.cache/dein')
+" dein.vim 本体
+let s:dein_repo_dir = s:dein_dir . '/repos/github.com/Shougo/dein.vim'
+
+" dein.vim がなければ github から落としてくる
+if &runtimepath !~# '/dein.vim'
+  if !isdirectory(s:dein_repo_dir)
+    execute '!git clone https://github.com/Shougo/dein.vim' s:dein_repo_dir
+  endif
+  execute 'set runtimepath^=' . fnamemodify(s:dein_repo_dir, ':p')
+endif
+
+" 設定開始
+if dein#load_state(s:dein_dir)
+  call dein#begin(s:dein_dir)
+
+  " プラグインリストを収めた TOML ファイル
+  " 予め TOML ファイルを用意しておく
+  let g:rc_dir    = expand("~/.config/nvim/")
+  let s:toml      = g:rc_dir . '/dein.toml'
+  let s:lazy_toml = g:rc_dir . '/dein_lazy.toml'
+
+  " TOML を読み込み、キャッシュしておく
+  call dein#load_toml(s:toml,      {'lazy': 0})
+  call dein#load_toml(s:lazy_toml, {'lazy': 1})
+
+  " dein
+  call dein#add('junegunn/fzf', { 'build': './install --all', 'merged': 0 }) 
+  call dein#add('junegunn/fzf.vim', { 'depends': 'fzf' })
+
+  " 設定終了
+  call dein#end()
+  call dein#save_state()
+endif
+
+" もし、未インストールものものがあったらインストール
+if dein#check_install()
+  call dein#install()
+endif
+" }}}
+
+command! -bang -nargs=? D
+\ Denite<bang>-auto_preview -mode=normal <args>
