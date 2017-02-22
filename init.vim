@@ -10,11 +10,6 @@ colorscheme elflord
 "---------------------------------------------------------------------
 " basic {{{
 "---------------------------------------------------------------------
-syntax on
-filetype on
-filetype indent on
-filetype plugin on
-
 " 行番号を表示
 set number
 " 相対行番号を有効にする
@@ -318,3 +313,9 @@ endif
 
 command! -bang -nargs=? D
 \ Denite<bang>-auto_preview -mode=normal <args>
+
+" シンタックスの設定を最後にしないと正しく読まれない問題
+syntax on
+filetype on
+filetype indent on
+filetype plugin on
