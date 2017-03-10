@@ -100,6 +100,7 @@ set ambiwidth=double
 
 " 括弧のハイライトを消す(括弧が複雑だと重くなる)
 let loaded_matchparen = 1
+
 " Python3 support
 let g:python3_host_prog = $PYENV_ROOT . '/shims/python3'
 
@@ -290,7 +291,7 @@ if dein#load_state(s:dein_dir)
   call dein#load_toml(s:lazy_toml, {'lazy': 1})
 
   " dein
-  call dein#add('junegunn/fzf', { 'build': './install --all', 'merged': 0 }) 
+  call dein#add('junegunn/fzf', { 'build': './install --all', 'merged': 0 })
   call dein#add('junegunn/fzf.vim', { 'depends': 'fzf' })
 
   " 設定終了
