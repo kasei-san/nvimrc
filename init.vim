@@ -224,13 +224,6 @@ augroup diff
   autocmd MyAutoCmd Filetype diff setlocal encoding=utf-8
 augroup END
 
-augroup vimrc
-  autocmd MyAutoCmd FileType gitcommit DiffGitCached | only | split | buffer 1 | syntax on
-  " .vimperatorrc もFiletype:vimとみなす
-  autocmd MyAutoCmd BufNewFile,BufRead .vimperatorrc setfiletype vim
-  autocmd MyAutoCmd BufNewFile,BufRead private setfiletype vim
-augroup END
-
 augroup erb
   autocmd MyAutoCmd BufNewFile,BufRead *.erb setfiletype=eruby
 augroup END
