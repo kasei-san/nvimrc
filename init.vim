@@ -247,7 +247,9 @@ highlight! zenkakuda ctermbg=grey ctermfg=grey guibg=black
 match zenkakuda /　/
 "}}}
 
-"バイナリ編集(xxd)モード（vim -b での起動、もしくは *.bin で発動します）
+"---------------------------------------------------------------------
+"バイナリ編集(xxd)モード（vim -b での起動、もしくは *.bin で発動します） {{{
+"---------------------------------------------------------------------
 augroup BinaryXXD
         autocmd!
         autocmd BufReadPre  *.bin let &binary =1
@@ -258,6 +260,7 @@ augroup BinaryXXD
         autocmd BufWritePost * if &binary | silent %!xxd -g 1
         autocmd BufWritePost * set nomod | endif
 augroup END
+"}}}
 
 "---------------------------------------------------------------------
 " {{{ dein.vim
