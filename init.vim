@@ -104,6 +104,9 @@ let loaded_matchparen = 1
 " Python3 support
 let g:python3_host_prog = $PYENV_ROOT . '/shims/python3'
 
+" 末尾の改行をfixしない"
+set nofixeol
+
 "}}}
 
 "---------------------------------------------------------------------
@@ -292,10 +295,6 @@ if dein#load_state(s:dein_dir)
   " TOML を読み込み、キャッシュしておく
   call dein#load_toml(s:toml,      {'lazy': 0})
   call dein#load_toml(s:lazy_toml, {'lazy': 1})
-
-  " dein
-  call dein#add('junegunn/fzf', { 'build': './install --all', 'merged': 0 })
-  call dein#add('junegunn/fzf.vim', { 'depends': 'fzf' })
 
   " 設定終了
   call dein#end()
